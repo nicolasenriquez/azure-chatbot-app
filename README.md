@@ -6,7 +6,7 @@ Una aplicación completa de chatbot impulsada por Azure AI con frontend React mo
 
 - **Frontend React**: Interfaz moderna con tema oscuro y componentes reutilizables
 - **Backend FastAPI**: API robusta con integración Azure AI
-- **Azure OpenAI**: Conversaciones inteligentes con GPT-4
+- **Azure OpenAI**: Conversaciones inteligentes con GPT-4o
 - **Azure AI Search**: Base de conocimiento para respuestas contextual
 - **Deployment Automatizado**: GitHub Actions + Azure App Services
 - **Responsive Design**: Optimizado para desktop, tablet y móvil
