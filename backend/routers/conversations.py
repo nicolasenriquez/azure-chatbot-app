@@ -53,7 +53,8 @@ async def get_conversation_messages(conversation_id: int):
                     "id": msg["id"],
                     "content": msg["content"],
                     "is_user": msg["is_user"],
-                    "timestamp": msg["timestamp"].isoformat()
+                    "timestamp": msg["timestamp"].isoformat(),
+                    "conversation_id": conversation_id
                 }
                 for msg in messages
             ]
