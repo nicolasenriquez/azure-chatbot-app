@@ -8,7 +8,8 @@ export interface ChatMessage {
   isUser: boolean;  
   timestamp: Date;  
   conversationId: number; // Asegúrate de usar `conversationId` aquí  
-} 
+  conversation_id?: number; // Agrega esta propiedad opcional para evitar conflictos  
+}
 
 export interface Conversation {
   id: number;
@@ -54,7 +55,7 @@ export function useChat() {
       }
       return response.data?.map(msg => ({
         ...msg,
-        conversationId: msg.conversation_id, // Mapea `conversation_id` a `conversationId`
+        conversationId: msg.conversation_id ?? null, // Asegúrate de manejar el caso en que sea undefined
         timestamp: new Date(msg.timestamp),
       })) || [];
     },
@@ -70,7 +71,7 @@ export function useChat() {
       }
       return {  
         ...response.data,  
-        conversationId: response.data.conversation_id, // Mapea `conversation_id` a `conversationId`  
+        conversationId: response.data?.conversation_id ?? null, // Usa encadenamiento opcional  
       }; 
     },
     onSuccess: (data) => {
