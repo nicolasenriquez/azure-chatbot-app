@@ -96,9 +96,14 @@ export function ChatInterface() {
               </div>
             )}
 
-            {messages.map((message) => (
-              <MessageBubble key={message.id} message={message} />
-            ))}
+            {messages.map((message) => {  
+              const chatMessage: ChatMessage = {  
+                ...message,  
+                isUser: message.is_user,  
+              };  
+              
+              return <MessageBubble key={chatMessage.id} message={chatMessage} />;  
+            })}  
 
             {isSendingMessage && <TypingIndicator />}
 
