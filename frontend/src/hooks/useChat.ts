@@ -2,12 +2,13 @@ import { useState, useCallback } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { chatAPI } from "@/lib/api";
 
-export interface ChatMessage {
-  id: number;
-  content: string;
-  isUser: boolean;
-  timestamp: Date;
-}
+export interface ChatMessage {  
+  id: number;  
+  content: string;  
+  isUser: boolean;  
+  timestamp: Date;  
+  conversationId: number; // Asegúrate de usar `conversationId` aquí  
+} 
 
 export interface Conversation {
   id: number;
@@ -33,7 +34,7 @@ export function useChat() {
       }
       return response.data?.map(conv => ({
         ...conv,
-        updatedAt: new Date(conv.updatedAt),
+        updatedAt: new Date(conv.updated_at),
       })) || [];
     },
   });
@@ -53,6 +54,7 @@ export function useChat() {
       }
       return response.data?.map(msg => ({
         ...msg,
+        conversationId: msg.conversation_id, // Mapea `conversation_id` a `conversationId`
         timestamp: new Date(msg.timestamp),
       })) || [];
     },
@@ -66,7 +68,10 @@ export function useChat() {
       if (!response.success) {
         throw new Error(response.error || "Failed to send message");
       }
-      return response.data!;
+      return {  
+        ...response.data,  
+        conversationId: response.data.conversation_id, // Mapea `conversation_id` a `conversationId`  
+      }; 
     },
     onSuccess: (data) => {
       // Update current conversation ID if it's a new conversation
