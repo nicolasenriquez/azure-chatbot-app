@@ -1,23 +1,32 @@
-{
-  "include": ["client/src/**/*", "shared/**/*", "server/**/*"],
-  "exclude": ["node_modules", "build", "dist", "**/*.test.ts"],
-  "compilerOptions": {
-    "incremental": true,
-    "tsBuildInfoFile": "./node_modules/typescript/tsbuildinfo",
-    "noEmit": true,
-    "module": "ESNext",
-    "strict": true,
-    "lib": ["esnext", "dom", "dom.iterable"],
-    "jsx": "preserve",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "allowImportingTsExtensions": true,
-    "moduleResolution": "bundler",
-    "baseUrl": ".",
-    "types": ["node", "vite/client"],
-    "paths": {
-      "@/*": ["./client/src/*"],
-      "@shared/*": ["./shared/*"]
-    }
-  }
+{  
+  "include": [  
+    "./client/src/**/*", // Ajuste para asegurar que las rutas sean relativas al archivo tsconfig.json  
+    "./shared/**/*",     // Asegúrate de que esta carpeta exista y contenga archivos .ts o .tsx  
+    "./server/**/*"      // Asegúrate de que esta carpeta exista y contenga archivos .ts o .tsx  
+  ],  
+  "exclude": [  
+    "./node_modules",    // Excluye la carpeta node_modules  
+    "./build",           // Excluye la carpeta build  
+    "./dist",            // Excluye la carpeta dist  
+    "**/*.test.ts"       // Excluye archivos de prueba con extensión .test.ts  
+  ],  
+  "compilerOptions": {  
+    "incremental": true, // Habilita compilaciones incrementales para mejorar el rendimiento  
+    "tsBuildInfoFile": "./node_modules/typescript/tsbuildinfo", // Archivo de información de compilación incremental  
+    "noEmit": true,      // No genera archivos de salida (útil para verificar tipos sin compilar)  
+    "module": "ESNext",  // Usa el sistema de módulos ESNext  
+    "strict": true,      // Habilita todas las comprobaciones estrictas de TypeScript  
+    "lib": ["esnext", "dom", "dom.iterable"], // Incluye bibliotecas para ESNext y DOM  
+    "jsx": "preserve",   // Preserva JSX para ser procesado por herramientas como Babel o Vite  
+    "esModuleInterop": true, // Habilita interoperabilidad con módulos CommonJS  
+    "skipLibCheck": true, // Omite la verificación de tipos en archivos de bibliotecas  
+    "allowImportingTsExtensions": true, // Permite importar archivos con extensiones .ts directamente  
+    "moduleResolution": "bundler", // Usa la resolución de módulos optimizada para bundlers como Vite  
+    "baseUrl": ".",      // Establece la base de las rutas relativas como el directorio raíz  
+    "types": ["node", "vite/client"], // Incluye tipos para Node.js y Vite  
+    "paths": {  
+      "@/*": ["./client/src/*"], // Alias para la carpeta client/src  
+      "@shared/*": ["./shared/*"] // Alias para la carpeta shared  
+    }  
+  }  
 }
