@@ -7,6 +7,7 @@ import { MessageBubble } from "./MessageBubble";
 import { ChatInput } from "./ChatInput";
 import { TypingIndicator } from "./TypingIndicator";
 import { useChat } from "@/hooks/useChat";
+import { ChatMessage } from "@/hooks/useChat";
 
 export function ChatInterface() {
   const {
