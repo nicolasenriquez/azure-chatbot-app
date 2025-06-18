@@ -2,6 +2,14 @@ import { useState, useCallback } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { chatAPI } from "@/lib/api";
 
+interface APIMessage {  
+  id: number;  
+  content: string;  
+  is_user: boolean;  
+  timestamp: string;  
+  conversation_id?: number; // Hacer que conversation_id sea opcional  
+} 
+
 export interface ChatMessage {  
   id: number;  
   content: string;  
@@ -55,8 +63,9 @@ export function useChat() {
       }
       return response.data?.map(msg => ({
         ...msg,
-        conversationId: msg.conversation_id ?? null, // Asegúrate de manejar el caso en que sea undefined
-        timestamp: new Date(msg.timestamp),
+        isUser: msg.is_user, // Mapea `is_user` a `isUser`
+        conversationId: msg.conversation_id ?? null, // Si `conversation_id` es undefined, asigna null
+        timestamp: new Date(msg.timestamp), // Convierte el timestamp a un objeto Date
       })) || [];
     },
     enabled: !!currentConversationId,
