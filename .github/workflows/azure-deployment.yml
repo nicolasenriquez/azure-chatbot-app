@@ -1,0 +1,85 @@
+name: Deploy Backend & Frontend to Azure Web Apps (Service Principal)
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PYTHON_VERSION: '3.11'
+  NODE_VERSION: '22'
+  AZURE_BACKEND_WEBAPP_NAME: <your-backend-webapp-name>
+  AZURE_FRONTEND_WEBAPP_NAME: <your-frontend-webapp-name>
+  AZURE_RESOURCE_GROUP: <your-resource-group-name>
+
+jobs:
+  build-and-deploy-backend:
+    name: Build & Deploy Backend (FastAPI / Python)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Optional: run tests here if you want
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+      - name: Deploy to Azure Web App (Backend)
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_BACKEND_WEBAPP_NAME }}
+          package: .
+
+  build-and-deploy-frontend:
+    name: Build & Deploy Frontend (React / Node)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+      - name: Deploy to Azure Web App (Frontend)
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_FRONTEND_WEBAPP_NAME }}
+          package: ./dist  # Adjust if your build output is elsewhere
