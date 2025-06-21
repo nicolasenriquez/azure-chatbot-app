@@ -131,7 +131,7 @@ if __name__ == "__main__":
         exit(1)            # Salir del programa con un código de error
 
     uvicorn.run(
-        "main:app",                                     # Nombre del archivo y la instancia de la aplicación
+        "backend.main:app",                             # Nombre del archivo y la instancia de la aplicación
         host="0.0.0.0",                                 # Escuchar en todas las interfaces de red
         port=settings.port,                             # Usar configuración de settings
         reload=settings.environment == "development",   # Recarga automática en modo desarrollo
