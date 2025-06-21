@@ -1,36 +1,37 @@
-{  
-  "name": "azure-ai-chatbot",  
-  "version": "1.0.0",  
-  "description": "Chatbot basado en Azure OpenAI, Azure AI Search y Turso, con frontend en React y backend en FastAPI.",  
-  "main": "backend/main.py",  
-  "scripts": {  
-    "start": "uvicorn backend.main:app --host 0.0.0.0 --port 8000",  
-    "build-frontend": "cd frontend && npm run build",  
-    "serve-frontend": "cd frontend && npx serve build",  
-    "test-backend": "pytest backend/tests",  
-    "test-frontend": "cd frontend && npm run test",  
-    "deploy": "echo 'Despliegue automatizado configurado con GitHub Actions'"  
-  },  
-  "dependencies": {  
-    "react": "^18.2.0",  
-    "react-dom": "^18.2.0",  
-    "react-scripts": "5.0.1",  
-    "axios": "^1.4.0",  
-    "material-ui": "^4.12.4",  
-    "tailwindcss": "^3.3.2",  
-    "chakra-ui": "^2.6.0",  
-    "font-awesome": "^6.4.0"  
-  },  
-  "devDependencies": {  
-    "eslint": "^8.50.0",  
-    "eslint-plugin-react": "^7.33.0",  
-    "jest": "^29.7.0",  
-    "serve": "^14.2.0"  
-  },  
-  "author": "Tu Nombre o Nombre de tu Organización",  
-  "license": "MIT",  
-  "engines": {  
-    "node": ">=16.0.0",  
-    "npm": ">=8.0.0"  
-  }  
+{
+  "name": "azure-ai-chatbot",
+  "version": "1.0.0",
+  "description": "Chatbot basado en Azure OpenAI, Azure AI Search y Turso, con frontend en React y backend en FastAPI.",
+  "main": "backend/main.py",
+  "scripts": {
+    "start": "uvicorn backend.main:app --host 0.0.0.0 --port 8000",
+    "build-frontend": "cd frontend && npm run build",
+    "serve-frontend": "cd frontend && npx serve build",
+    "test-backend": "pytest backend/tests",
+    "test-frontend": "cd frontend && npm run test",
+    "deploy": "echo 'Despliegue automatizado configurado con GitHub Actions'"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "axios": "^1.4.0",
+    "material-ui": "^4.12.4",
+    "tailwindcss": "^3.3.2",
+    "@chakra-ui/react": "^2.6.0",
+    "@chakra-ui/icons": "^2.1.0",
+    "font-awesome": "^6.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "eslint-plugin-react": "^7.33.0",
+    "jest": "^29.7.0",
+    "serve": "^14.2.0"
+  },
+  "author": "Tu Nombre o Nombre de tu Organización",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
 }
