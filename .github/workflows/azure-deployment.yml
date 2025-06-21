@@ -41,7 +41,7 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ secrets.AZURE_WEBAPP_NAME_BACKEND }}
-          package: .
+          package: ./backend
 
   build-and-deploy-frontend:
     name: Deploy Frontend (Static HTML/CSS/JS)
@@ -71,4 +71,4 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ secrets.AZURE_WEBAPP_NAME_FRONTEND }}
-          package: .
+          package: ./frontend
