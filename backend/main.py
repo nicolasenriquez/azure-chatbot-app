@@ -120,20 +120,27 @@ async def global_exception_handler(request, exc):
         )
 
 
-# Punto de entrada para ejecutar la aplicación
-if __name__ == "__main__":
-
-    # Validar las variables de entorno antes de iniciar la aplicación
+# Punto de entrada para ejecutar la aplicación  
+if __name__ == "__main__":  
+    import os  
+  
+    # Verificar si el entorno es producción  
+    if os.getenv("ENVIRONMENT") == "production":  
+        print("⚠️ Este archivo no debe ejecutarse directamente en producción.")  
+        exit(1)  
+  
+    # Validar las variables de entorno antes de iniciar la aplicación  
     try:  
         validate_azure_settings()  
     except RuntimeError as e:  
-        print(str(e))  
-        exit(1)            # Salir del programa con un código de error
-
-    uvicorn.run(
-        "backend.main:app",                             # Nombre del archivo y la instancia de la aplicación
-        host="0.0.0.0",                                 # Escuchar en todas las interfaces de red
-        port=settings.port,                             # Usar configuración de settings
-        reload=settings.environment == "development",   # Recarga automática en modo desarrollo
-        log_level=settings.log_level.lower()            # Usar configuración de settings
-    )
+        print(f"❌ Error de configuración: {str(e)}")  
+        exit(1)  # Salir del programa con un código de error  
+  
+    # Ejecutar el servidor Uvicorn  
+    uvicorn.run(  
+        "backend.main:app",                             # Nombre del archivo y la instancia de la aplicación  
+        host="0.0.0.0",                                 # Escuchar en todas las interfaces de red  
+        port=settings.port,                             # Usar configuración de settings  
+        reload=settings.environment == "development",   # Recarga automática en modo desarrollo  
+        log_level=settings.log_level.lower()            # Usar configuración de settings  
+    )  
