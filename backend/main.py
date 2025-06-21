@@ -46,7 +46,8 @@ app = FastAPI(
 # Configurar middleware de CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins,
+    allow_origins=['https://bda-chatbot-frontend-e4ddbvftcmcjbvd3.chilecentral-01.azurewebsites.net'],
+    #allow_origins=settings.cors_origins,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],
