@@ -12,7 +12,7 @@ class ChatbotInterface {
         this.messageHistory = [];
         
         // API Configuration - FastAPI Backend
-        this.apiBaseUrl = 'http://bda-chatbot-backend-dkfeejcbhpfreha3.chilecentral-01.azurewebsites.net'; // Update this to match your backend URL
+        this.apiBaseUrl = 'https://bda-chatbot-backend-dkfeejcbhpfreha3.chilecentral-01.azurewebsites.net'; // Update this to match your backend URL
         this.apiEndpoints = {
             chat: '/api/chat',
             health: '/api/health',
