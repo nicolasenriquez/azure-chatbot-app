@@ -13,21 +13,6 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-# Volver a probar mas tarde, para acceder a secretos Azure KV
-# credential = ClientSecretCredential(
-#     tenant_id=os.getenv("AZURE_TENANT_ID"),
-#     client_id=os.getenv("AZURE_CLIENT_ID"),
-#     client_secret=os.getenv("AZURE_CLIENT_SECRET")
-# )
-
-# client = SecretClient(
-#     vault_url=os.getenv("AZURE_KEY_VAULT_URL"),
-#     credential=credential
-# )
-
-# print(client.get_secret('azure-api-key').value)
-
-
 class Settings(BaseSettings):
     
     # App configuration
