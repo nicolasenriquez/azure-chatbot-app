@@ -59,67 +59,7 @@ Utiliza un patrón de **Generación Aumentada por Recuperación (RAG)** para bas
 
 El sistema sigue un flujo de datos claro desde que el usuario envía un mensaje hasta que recibe una respuesta de alta calidad.
 
-<details>
-<summary>Haz clic aquí para ver el diagrama de arquitectura (código Mermaid)</summary>
-
-```mermaid
-graph TD
-    subgraph "🌐 Usuario Final"
-        A[📱 Interfaz de Usuario Frontend]
-    end
-
-    subgraph "⚙️ Backend (FastAPI)"
-        B[API Endpoint: /api/chat]
-        C{🤖 Grafo Supervisor (LangGraph)}
-    end
-
-    subgraph "🧠 Lógica del Agente Cíclico"
-        D[1. Nodo RAG: Generar Respuesta Inicial]
-        E[2. Nodo Supervisor: Evaluar Calidad]
-        F[3a. Nodo Refinador: Corregir y Mejorar]
-        G[3b. Nodo de Búsqueda Web: Enriquecer]
-    end
-
-    subgraph "☁️ Servicios de Azure AI"
-        H[LLM: Azure OpenAI]
-        I[Vector Store: Azure AI Search]
-    end
-
-    A -- "POST /api/chat\n{ message: '...' }" --> B
-    B -- "Inicia el grafo con la pregunta" --> C
-    
-    C -- "Comienza el ciclo" --> D
-    D -- "Consulta con query reformulada" --> I
-    I -- "Retorna documentos relevantes" --> D
-    D -- "Pregunta + Contexto" --> H
-    H -- "Respuesta inicial" --> D
-    D -- "Respuesta generada" --> E
-
-    E -- "Evalúa la respuesta" --> H
-    H -- "Decisión: Final, Refinar o Wikipedia" --> E
-    
-    E -- "Decisión" --> C
-
-    C -- route_decision --> F
-    C -- route_decision --> G
-    C -- route_decision --> Z[🏁 Fin del Grafo]
-
-    F -- "Respuesta refinada" --> Z
-    G -- "Respuesta enriquecida" --> Z
-
-    Z -- "Respuesta final y pulida" --> B
-    B -- "JSON: { response: '...' }" --> A
-
-    style A fill:#D6EAF8,stroke:#3498DB
-    style B fill:#D1F2EB,stroke:#1ABC9C
-    style C fill:#FCF3CF,stroke:#F1C40F
-    style H fill:#FDEDEC,stroke:#E74C3C
-    style I fill:#FDEDEC,stroke:#E74C3C
-```
-</details>
-
-*(Aquí se puede insertar una imagen generada a partir del código Mermaid anterior para mayor portabilidad)*
-`[Diagrama de Arquitectura]`
+![alt text](image.png)
 
 ### Conceptos Clave de la Arquitectura
 
