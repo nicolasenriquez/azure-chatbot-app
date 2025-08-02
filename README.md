@@ -10,13 +10,6 @@ Un asistente de chatbot inteligente con un pipeline RAG (Retrieval-Augmented Gen
 
 ---
 
-## 🚀 Demostración Visual
-
-Aquí puedes ver al chatbot en acción. La interfaz es limpia, responsive y ofrece una experiencia de usuario fluida.
-
-*(Aquí se puede insertar un GIF grabado de la pantalla mostrando la interacción con el chatbot)*
-`[GIF de la interfaz de usuario]`
-
 ## 🎯 Descripción General
 
 Este proyecto es una implementación completa de un chatbot de IA diseñado para un propósito específico: servir como asistente para estudiantes de una fundación que forma a profesionales y emprendedores de pequeños negocios. El chatbot está especializado en temas de **logística, gestión de inventario, bodegaje y reabastecimiento**.
@@ -55,12 +48,6 @@ Utiliza un patrón de **Generación Aumentada por Recuperación (RAG)** para bas
 | **Frontend** | HTML5, CSS3, JavaScript | Estructura, estilo y lógica de la interfaz |
 | | Marked.js | Renderizado de respuestas en formato Markdown |
 
-## 🏗️ Arquitectura y Flujo de Datos
-
-El sistema sigue un flujo de datos claro desde que el usuario envía un mensaje hasta que recibe una respuesta de alta calidad.
-
-![alt text](image.png)
-
 ### Conceptos Clave de la Arquitectura
 
 Para entender cómo el chatbot logra respuestas coherentes y de alta calidad, es importante conocer tres componentes fundamentales:
@@ -68,7 +55,6 @@ Para entender cómo el chatbot logra respuestas coherentes y de alta calidad, es
 #### 1. RAG Contextual y con Memoria
 A diferencia de un RAG simple, este sistema tiene **memoria conversacional**.
 - **Uso de Memoria:** Cada conversación utiliza una instancia de `ConversationBufferMemory` que almacena las interacciones pasadas.
-- **Reformulación de Preguntas:** Antes de buscar en la base de conocimientos, el sistema utiliza un prompt específico (`contextualize_retriever_system_prompt`) para reformular la pregunta del usuario a la luz del historial de la conversación. Por ejemplo, si el usuario pregunta "¿Y sobre las estanterías?", el sistema lo convierte en una pregunta autónoma como "¿Qué tipos de estanterías son mejores para la gestión de inventario en un almacén?". Esto hace que la búsqueda en el vector store sea mucho más precisa y relevante.
 
 #### 2. Agente Supervisor y Grafo de Estados (LangGraph)
 Aquí reside la inteligencia principal del chatbot para el control de calidad.
