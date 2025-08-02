@@ -4,7 +4,6 @@ conversational agent. It initializes a conversational chain with memory,
 generates responses based on user questions.
 """
 
-import logging
 from datetime import datetime, timezone
 
 import openai
@@ -15,10 +14,6 @@ from langchain_community.callbacks.manager import get_openai_callback
 
 from backend.app.config.settings import get_settings
 from backend.app.utils import get_model, get_retriever
-
-logging.basicConfig(
-    level=logging.ERROR, format="%(asctime)s - %(levelname)s - %(message)s"
-)
 
 settings = get_settings()
 
@@ -119,15 +114,13 @@ async def generate_response(
         )
         return response.get("answer")
     except openai.APIError as e:
-        logging.error(
-            f"Error generating response for session {session_id}: {e}",
-            exc_info=True,
+        print(
+            f"Error generating response for session {session_id}: {e}"
         )
         raise Exception(f"Error communicating with OpenAI API: {e.args[0]}")
     except Exception as e:
-        logging.error(
-            f"Error generating response for session {session_id}: {e}",
-            exc_info=True
+        print(
+            f"Error generating response for session {session_id}: {e}"
         )
         raise Exception(f"Error al generar la respuesta: {str(e)}")
 
@@ -168,14 +161,12 @@ async def generate_logs(
             }
         return logs
     except openai.APIError as e:
-        logging.error(
-            f"Error generating logs for session {session_id}: {e}",
-            exc_info=True,
+        print(
+            f"Error generating logs for session {session_id}: {e}"
         )
         raise Exception(f"Error communicating with OpenAI API: {e.args[0]}")
     except Exception as e:
-        logging.error(
-            f"Error generating logs for session {session_id}: {e}",
-            exc_info=True
+        print(
+            f"Error generating logs for session {session_id}: {e}"
         )
         raise Exception(f"Error al generar los logs: {str(e)}")
