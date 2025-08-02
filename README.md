@@ -1,6 +1,6 @@
 # Azure AI Chatbot Agent 🤖
 
-Un asistente de chatbot inteligente con un pipeline RAG (Retrieval-Augmented Generation) y un agente supervisor, construido con FastAPI, LangGraph y la potencia de los servicios de Azure AI.
+An intelligent chatbot assistant with a Retrieval-Augmented Generation (RAG) pipeline and a supervisor agent, built with FastAPI, LangGraph, and the power of Azure AI services.
 
 [![Python](https://img.shields.io/badge/Python-3.11+-blue?style=for-the-badge&logo=python)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
@@ -10,167 +10,167 @@ Un asistente de chatbot inteligente con un pipeline RAG (Retrieval-Augmented Gen
 
 ---
 
-## 🎯 Descripción General
+## 🎯 Overview
 
-Este proyecto es una implementación completa de un chatbot de IA diseñado para un propósito específico: servir como asistente para estudiantes de una fundación que forma a profesionales y emprendedores de pequeños negocios. El chatbot está especializado en temas de **logística, gestión de inventario, bodegaje y reabastecimiento**.
+This project is a complete implementation of an AI chatbot designed for a specific purpose: to serve as an assistant for students of a foundation that trains professionals and small business entrepreneurs. The chatbot specializes in topics of **logistics, inventory management, warehousing, and restocking**.
 
-Utiliza un patrón de **Generación Aumentada por Recuperación (RAG)** para basar sus respuestas en una base de conocimientos de documentos PDF, garantizando que la información sea precisa y relevante. Para asegurar la calidad y coherencia de las respuestas, se ha implementado un **agente supervisor con LangGraph** que evalúa, refina y, si es necesario, enriquece las respuestas antes de entregarlas al usuario.
+It uses a **Retrieval-Augmented Generation (RAG)** pattern to base its answers on a knowledge base of PDF documents, ensuring that the information is accurate and relevant. To ensure the quality and consistency of the answers, a **supervisor agent with LangGraph** has been implemented to evaluate, refine, and, if necessary, enrich the answers before delivering them to the user.
 
-## ✨ Características Principales
+## ✨ Key Features
 
 ### Backend (FastAPI)
-- ✅ **API Robusta:** Construida con FastAPI, ofreciendo alto rendimiento y documentación automática de endpoints.
-- ✅ **Pipeline RAG:** Utiliza Azure AI Search como un vector store para recuperar información relevante de documentos.
-- ✅ **Agente Supervisor (LangGraph):** Un grafo de estados que orquesta un flujo de control de calidad:
-    - **Evaluación:** Decide si la respuesta del RAG es adecuada.
-    - **Refinamiento:** Corrige y mejora el estilo o la claridad de la respuesta.
-    - **Enriquecimiento:** Puede consultar fuentes externas (como Wikipedia) para añadir contexto adicional.
-- ✅ **Integración Nativa con Azure:** Utiliza `AzureChatOpenAI` para los modelos de lenguaje y `AzureOpenAIEmbeddings` para la generación de embeddings.
-- ✅ **Gestión de Conversación:** Mantiene el historial del chat para dar respuestas contextuales.
-- ✅ **Configuración Centralizada:** Manejo de secretos y configuraciones a través de variables de entorno con Pydantic.
+- ✅ **Robust API:** Built with FastAPI, offering high performance and automatic endpoint documentation.
+- ✅ **RAG Pipeline:** Uses Azure AI Search as a vector store to retrieve relevant information from documents.
+- ✅ **Supervisor Agent (LangGraph):** A state graph that orchestrates a quality control flow:
+    - **Evaluation:** Decides if the RAG's response is appropriate.
+    - **Refinement:** Corrects and improves the style or clarity of the response.
+    - **Enrichment:** Can consult external sources (like Wikipedia) to add additional context.
+- ✅ **Native Integration with Azure:** Uses `AzureChatOpenAI` for language models and `AzureOpenAIEmbeddings` for generating embeddings.
+- ✅ **Conversation Management:** Maintains chat history to provide contextual responses.
+- ✅ **Centralized Configuration:** Manages secrets and configurations through environment variables with Pydantic.
 
 ### Frontend (HTML, CSS, JS)
-- ✅ **Interfaz Moderna:** Diseño *dark-mode* con acentos de color y una estética profesional.
-- ✅ **Totalmente Responsive:** Adaptable a dispositivos de escritorio, tabletas y móviles.
-- ✅ **Experiencia de Usuario Mejorada:** Indicador de "escribiendo...", auto-ajuste del área de texto y animaciones suaves.
-- ✅ **Renderizado de Markdown:** Las respuestas del chatbot se renderizan como Markdown, permitiendo formato de texto, listas y más.
-- ✅ **PWA Ready:** Incluye un Service Worker para capacidades offline básicas.
+- ✅ **Modern Interface:** *Dark-mode* design with color accents and a professional aesthetic.
+- ✅ **Fully Responsive:** Adaptable to desktop, tablet, and mobile devices.
+- ✅ **Enhanced User Experience:** "Typing..." indicator, auto-adjusting text area, and smooth animations.
+- ✅ **Markdown Rendering:** The chatbot's responses are rendered as Markdown, allowing for text formatting, lists, and more.
+- ✅ **PWA Ready:** Includes a Service Worker for basic offline capabilities.
 
 ## 🛠️ Tech Stack
 
-| Área | Tecnología/Servicio | Propósito |
-| :--- | :--- | :--- |
-| **Backend** | Python, FastAPI, Uvicorn | Creación de la API y servidor web |
-| | LangChain, LangGraph | Orquestación del pipeline RAG y lógica de agentes |
-| **IA & Datos** | Azure OpenAI | Modelos de Lenguaje (GPT-4) y Embeddings |
-| | Azure AI Search | Vector Store para la base de conocimientos |
-| | Azure Blob Storage | Almacenamiento de los documentos fuente (PDFs) |
-| **Frontend** | HTML5, CSS3, JavaScript | Estructura, estilo y lógica de la interfaz |
-| | Marked.js | Renderizado de respuestas en formato Markdown |
+| Area          | Technology/Service      | Purpose                                           |
+| :------------ | :---------------------- | :------------------------------------------------ |
+| **Backend**   | Python, FastAPI, Uvicorn| API creation and web server                       |
+|               | LangChain, LangGraph    | Orchestration of the RAG pipeline and agent logic |
+| **AI & Data** | Azure OpenAI            | Language Models (GPT-4) and Embeddings            |
+|               | Azure AI Search         | Vector Store for the knowledge base               |
+|               | Azure Blob Storage      | Storage of source documents (PDFs)                |
+| **Frontend**  | HTML5, CSS3, JavaScript | Structure, style, and logic of the interface      |
+|               | Marked.js               | Rendering of responses in Markdown format         |
 
-### Conceptos Clave de la Arquitectura
+### Key Architecture Concepts
 
-Para entender cómo el chatbot logra respuestas coherentes y de alta calidad, es importante conocer tres componentes fundamentales:
+To understand how the chatbot achieves coherent and high-quality responses, it is important to know three fundamental components:
 
-#### 1. RAG Contextual y con Memoria
-A diferencia de un RAG simple, este sistema tiene **memoria conversacional**.
-- **Uso de Memoria:** Cada conversación utiliza una instancia de `ConversationBufferMemory` que almacena las interacciones pasadas.
+#### 1. Contextual RAG with Memory
+Unlike a simple RAG, this system has **conversational memory**.
+- **Memory Usage:** Each conversation uses an instance of `ConversationBufferMemory` that stores past interactions.
 
-#### 2. Agente Supervisor y Grafo de Estados (LangGraph)
-Aquí reside la inteligencia principal del chatbot para el control de calidad.
-- **Grafo de Estados:** `LangGraph` se utiliza para definir un flujo de trabajo cíclico y condicional, no una simple secuencia lineal. Cada nodo en el grafo representa una acción (llamar al RAG, evaluar, refinar).
-- **Agente Supervisor:** Es un LLM con un rol definido: actuar como un supervisor de calidad. Después de que el RAG genera una respuesta, este agente la inspecciona y decide el siguiente paso.
-- **Decisiones Estructuradas:** El agente no solo responde, sino que emite una decisión estructurada (usando Pydantic models como `FinalAnswer`, `CorrectAndRefine`, `ComplementWithWikipedia`). Esta decisión determina qué camino tomar en el grafo, permitiendo un proceso de refinamiento iterativo hasta que la respuesta cumple con los estándares de calidad.
+#### 2. Supervisor Agent and State Graph (LangGraph)
+This is where the main intelligence of the chatbot for quality control resides.
+- **State Graph:** `LangGraph` is used to define a cyclical and conditional workflow, not a simple linear sequence. Each node in the graph represents an action (calling the RAG, evaluating, refining).
+- **Supervisor Agent:** It is an LLM with a defined role: to act as a quality supervisor. After the RAG generates a response, this agent inspects it and decides the next step.
+- **Structured Decisions:** The agent not only responds but also issues a structured decision (using Pydantic models like `FinalAnswer`, `CorrectAndRefine`, `ComplementWithWikipedia`). This decision determines which path to take in the graph, allowing for an iterative refinement process until the response meets quality standards.
 
-#### 3. Gestión de la Memoria Conversacional
-- **Aislamiento:** La memoria se gestiona por sesión, lo que garantiza que las conversaciones de diferentes usuarios no se mezclen.
-- **Componente Clave:** La memoria es el pilar del "RAG Contextual". Sin ella, el chatbot no podría entender preguntas de seguimiento y cada interacción sería tratada como si fuera la primera vez.
+#### 3. Conversational Memory Management
+- **Isolation:** Memory is managed per session, ensuring that conversations from different users do not mix.
+- **Key Component:** Memory is the pillar of "Contextual RAG." Without it, the chatbot could not understand follow-up questions, and each interaction would be treated as if it were the first time.
 
-**Flujo detallado:**
-1.  **Petición del Usuario:** El usuario escribe un mensaje en el frontend y lo envía. Se realiza una llamada POST al endpoint `/api/chat` del backend FastAPI.
-2.  **Inicio del Grafo:** La API recibe la petición e invoca al grafo de LangGraph, pasando la pregunta del usuario.
-3.  **Generación RAG:** El primer nodo del grafo (`call_rag_agent`) utiliza Azure AI Search para encontrar los fragmentos de texto más relevantes en la base de conocimientos. Luego, envía estos fragmentos junto con la pregunta original al modelo de Azure OpenAI para generar una respuesta inicial.
-4.  **Supervisión y Evaluación:** La respuesta generada por el RAG pasa al `call_supervisor_agent`. Este agente (un LLM con instrucciones específicas) evalúa la calidad de la respuesta.
-5.  **Enrutamiento Condicional:** Basado en la evaluación, el supervisor decide una de tres rutas:
-    *   **FinalAnswer:** La respuesta es excelente y se envía directamente al final del flujo.
-    *   **CorrectAndRefine:** La respuesta es conceptualmente correcta pero necesita mejoras. El supervisor la reescribe para mejorar su claridad y estilo.
-    *   **ComplementWithWikipedia:** La respuesta es buena pero incompleta. Se realiza una búsqueda en Wikipedia para obtener más contexto y se combina con la respuesta original.
-6.  **Respuesta Final:** La respuesta final, ya sea aprobada, refinada o enriquecida, se devuelve como JSON al frontend.
-7.  **Visualización:** El frontend recibe la respuesta, la renderiza desde Markdown a HTML y la muestra en el chat.
+**Detailed Flow:**
+1.  **User Request:** The user types a message in the frontend and sends it. A POST call is made to the `/api/chat` endpoint of the FastAPI backend.
+2.  **Graph Start:** The API receives the request and invokes the LangGraph graph, passing the user's question.
+3.  **RAG Generation:** The first node of the graph (`call_rag_agent`) uses Azure AI Search to find the most relevant text fragments in the knowledge base. Then, it sends these fragments along with the original question to the Azure OpenAI model to generate an initial response.
+4.  **Supervision and Evaluation:** The response generated by the RAG passes to the `call_supervisor_agent`. This agent (an LLM with specific instructions) evaluates the quality of the response.
+5.  **Conditional Routing:** Based on the evaluation, the supervisor decides on one of three routes:
+    *   **FinalAnswer:** The response is excellent and is sent directly to the end of the flow.
+    *   **CorrectAndRefine:** The response is conceptually correct but needs improvement. The supervisor rewrites it to improve its clarity and style.
+    *   **ComplementWithWikipedia:** The response is good but incomplete. A search is performed on Wikipedia to get more context and is combined with the original response.
+6.  **Final Response:** The final response, whether approved, refined, or enriched, is returned as JSON to the frontend.
+7.  **Visualization:** The frontend receives the response, renders it from Markdown to HTML, and displays it in the chat.
 
-## ⚙️ Guía de Instalación y Ejecución
+## ⚙️ Installation and Execution Guide
 
-Sigue estos pasos para poner en marcha el proyecto en tu entorno local.
+Follow these steps to get the project up and running in your local environment.
 
-### Prerrequisitos
+### Prerequisites
 - Git
 - Python 3.10+
-- Una cuenta de Azure con acceso a los servicios mencionados (OpenAI, AI Search, Blob Storage).
+- An Azure account with access to the mentioned services (OpenAI, AI Search, Blob Storage).
 
-### 1. Clonar el Repositorio
+### 1. Clone the Repository
 ```bash
-git clone https://github.com/tu-usuario/tu-repositorio.git
-cd tu-repositorio
+git clone https://github.com/your-user/your-repository.git
+cd your-repository
 ```
 
-### 2. Configuración del Backend
-a. **Crear y activar un entorno virtual:**
+### 2. Backend Configuration
+a. **Create and activate a virtual environment:**
 ```bash
-# En Windows
+# On Windows
 python -m venv venv
 venv\Scripts\activate
 
-# En macOS/Linux
+# On macOS/Linux
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-b. **Instalar dependencias:**
+b. **Install dependencies:**
 ```bash
 pip install -r backend/requirements.txt
 ```
 
-c. **Configurar variables de entorno:**
-Crea un archivo llamado `.env` en la raíz del proyecto. Copia el contenido de `.env.example` (si existe) o usa la siguiente plantilla y rellena los valores con tus credenciales de Azure.
+c. **Configure environment variables:**
+Create a file named `.env` in the root of the project. Copy the content of `.env.example` (if it exists) or use the following template and fill in the values with your Azure credentials.
 
 ```ini
 # .env
 
 # Azure OpenAI
-AZURE_API_KEY="TU_API_KEY_DE_AZURE_OPENAI"
-AZURE_ENDPOINT="https://TU_ENDPOINT.openai.azure.com/"
+AZURE_API_KEY="YOUR_AZURE_OPENAI_API_KEY"
+AZURE_ENDPOINT="https://YOUR_ENDPOINT.openai.azure.com/"
 AZURE_API_VERSION="2024-02-01"
-AZURE_LLM_DEPLOYMENT="NOMBRE_DEL_DEPLOYMENT_CHAT"
-AZURE_EMBEDDING_DEPLOYMENT="NOMBRE_DEL_DEPLOYMENT_EMBEDDING"
+AZURE_LLM_DEPLOYMENT="CHAT_DEPLOYMENT_NAME"
+AZURE_EMBEDDING_DEPLOYMENT="EMBEDDING_DEPLOYMENT_NAME"
 
 # Azure AI Search
-AZURE_COGNITIVE_SEARCH_NAME="NOMBRE_DE_TU_SERVICIO_AI_SEARCH"
-AZURE_COGNITIVE_SEARCH_API_KEY="API_KEY_DE_AI_SEARCH"
-AZURE_COGNITIVE_SEARCH_INDEX_NAME="NOMBRE_DEL_INDICE"
+AZURE_COGNITIVE_SEARCH_NAME="YOUR_AI_SEARCH_SERVICE_NAME"
+AZURE_COGNITIVE_SEARCH_API_KEY="AI_SEARCH_API_KEY"
+AZURE_COGNITIVE_SEARCH_INDEX_NAME="INDEX_NAME"
 
 # Azure Blob Storage
-AZURE_STORAGE_ACCOUNT_NAME="NOMBRE_DE_LA_CUENTA_DE_STORAGE"
-AZURE_STORAGE_ACCOUNT_API_KEY="API_KEY_DE_LA_CUENTA_DE_STORAGE"
-AZURE_STORAGE_ACCOUNT_CONTAINER_NAME="NOMBRE_DEL_CONTENEDOR"
+AZURE_STORAGE_ACCOUNT_NAME="STORAGE_ACCOUNT_NAME"
+AZURE_STORAGE_ACCOUNT_API_KEY="STORAGE_ACCOUNT_API_KEY"
+AZURE_STORAGE_ACCOUNT_CONTAINER_NAME="CONTAINER_NAME"
 AZURE_STORAGE_ACCOUNT_ENDPOINT_SUFFIX=""
 
-# Turso DB (Opcional, si se usa para logs)
+# Turso DB (Optional, if used for logs)
 TURSO_AUTH_TOKEN=""
 TURSO_DATABASE_URL=""
 ```
 
-d. **Poblar la Base de Conocimientos:**
-Asegúrate de haber subido tus archivos PDF al contenedor de Azure Blob Storage. Luego, puedes ejecutar el script para procesarlos y cargarlos en Azure AI Search. (Este paso podría requerir un script de inicialización).
+d. **Populate the Knowledge Base:**
+Make sure you have uploaded your PDF files to the Azure Blob Storage container. Then, you can run the script to process them and load them into Azure AI Search. (This step might require an initialization script).
 
-### 3. Ejecutar la Aplicación
+### 3. Run the Application
 
-a. **Iniciar el servidor del backend:**
+a. **Start the backend server:**
 ```bash
 uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
-La API estará disponible en `http://localhost:8000`.
+The API will be available at `http://localhost:8000`.
 
-b. **Iniciar el servidor del frontend:**
-Abre otra terminal y ejecuta un servidor web simple desde la carpeta `frontend`.
+b. **Start the frontend server:**
+Open another terminal and run a simple web server from the `frontend` folder.
 ```bash
-# Navega a la carpeta del frontend
+# Navigate to the frontend folder
 cd frontend
 
-# Ejecuta el servidor
+# Run the server
 python -m http.server 8001
 ```
-La interfaz de usuario estará disponible en `http://localhost:8001`.
+The user interface will be available at `http://localhost:8001`.
 
-## 📖 Uso
+## 📖 Usage
 
-1.  Abre tu navegador y ve a `http://localhost:8001`.
-2.  Haz clic en "Empezar conversación".
-3.  Escribe tus preguntas sobre logística, inventario o temas relacionados en el campo de texto.
-4.  Presiona Enter o haz clic en el botón de enviar para recibir una respuesta del Ingenierín AI Assistant.
+1.  Open your browser and go to `http://localhost:8001`.
+2.  Click on "Start conversation".
+3.  Type your questions about logistics, inventory, or related topics in the text field.
+4.  Press Enter or click the send button to receive a response from the Ingenierín AI Assistant.
 
-## 📄 Licencia
+## 📄 License
 
-Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+This project is under the MIT License. See the `LICENSE` file for more details.
 
 ---
-*Creado para potenciar y democratizar el aprendizaje a través de la IA.*
+*Created to empower and democratize learning through AI.*
