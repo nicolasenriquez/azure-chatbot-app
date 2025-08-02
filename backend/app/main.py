@@ -40,7 +40,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title=settings.APP_NAME,
     description="API interact with a RAG-based Agentic Chatbot",
-    version="1.0.1",
+    version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
     lifespan=lifespan,
@@ -85,7 +85,7 @@ async def health_check():
         return {
             "status": "healthy",
             "service": "ai-chatbot-backend",
-            "version": "1.0.1",
+            "version": "1.0.0",
             "environment": settings.ENVIRONMENT,
             "timestamp": datetime.utcnow().isoformat(),
         }
